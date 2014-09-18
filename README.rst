@@ -1,6 +1,6 @@
-|travis ci build state|
+[![travis ci build state](https://travis-ci.org/JasonAUnrein/Persistent-Pineapple.svg?branch=master)](https://travis-ci.org/JasonAUnrein/Persistent-Pineapple)
+[![rtd state](https://readthedocs.org/projects/persistent-pineapple/badge/?version=latest)](https://readthedocs.org/projects/persistent-pineapple/?badge=latest)
 
-|rtd state|
 
 Introduction
 ============
@@ -55,10 +55,3 @@ Example code:
     ...     print "we're in debug mode"
     we're in debug mode
     >>> settings.debug = False
-
-.. |travis ci build state| image:: https://travis-ci.org/JasonAUnrein/Persistent-Pineapple.svg?branch=master
-   :target: https://travis-ci.org/JasonAUnrein/Persistent-Pineapple
-
-.. |rtd state| image:: https://readthedocs.org/projects/persistent-pineapple/badge/?version=latest
-    :target: https://readthedocs.org/projects/persistent-pineapple/?badge=latest
-    :alt: Documentation Status
