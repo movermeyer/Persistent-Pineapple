@@ -1,3 +1,7 @@
+|travis ci build state|
+
+|rtd state|
+
 Introduction
 ============
 
@@ -54,3 +58,7 @@ Example code:
 
 .. |travis ci build state| image:: https://travis-ci.org/JasonAUnrein/Persistent-Pineapple.svg?branch=master
    :target: https://travis-ci.org/JasonAUnrein/Persistent-Pineapple
+
+.. |rtd state| image:: https://readthedocs.org/projects/persistent-pineapple/badge/?version=latest
+    :target: https://readthedocs.org/projects/persistent-pineapple/?badge=latest
+    :alt: Documentation Status

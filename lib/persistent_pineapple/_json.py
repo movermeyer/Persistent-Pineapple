@@ -7,15 +7,15 @@ __author__ = "Timothy McFadden"
 __copyright__ = "Copyright 2014"
 __credits__ = ["Timothy McFadden", "Jason Unrein"]
 __license__ = "GPL"
-__version__ = "0.0.0.1"  # file version
+__version__ = "0.0.0.2"  # file version
 __maintainer__ = "Jason Unrein"
 __email__ = "JasonAUnrein@gmail.com"
 __status__ = "Development"
 
 # Imports #####################################################################
-import re
 import json
-
+import re
+import sys
 
 ###############################################################################
 def container_to_ascii(item):
@@ -25,17 +25,17 @@ def container_to_ascii(item):
     Everything else will be ignored.
 
     Examples::
-        >>> print container_to_ascii(int(4))
+        >>> print(container_to_ascii(int(4)))
         4
-        >>> print container_to_ascii(['test', u'test'])
+        >>> print(container_to_ascii(['test', u'test']))
         ['test', 'test']
-        >>> print container_to_ascii({u'one': u'test', u'two': 2, u'three':
-        ... {'test': 2}, 4: [1, 2, 3, u'four']})
+        >>> print(container_to_ascii({u'one': u'test', u'two': 2, u'three':
+        ... {'test': 2}, 4: [1, 2, 3, u'four']}))
         {'one': 'test', 4: [1, 2, 3, 'four'], 'three': {'test': 2}, 'two': 2}
         >>>
     '''
     result = None
-    if type(item) is unicode:
+    if sys.version_info.major == 2 and type(item) is unicode:
         result = item.encode('ascii')
     elif type(item) is list:
         result = map(lambda x: container_to_ascii(x), item[:])
@@ -148,7 +148,7 @@ class JSON(object):
             lines = self._prep_json_string(string)
         elif path:
             with open(path, 'rb') as pfile:
-                text = pfile.read()
+                text = pfile.read().decode()
             lines = self._prep_json_string(text)
         else:
             raise ValueError("Must enter either string or path")
@@ -161,15 +161,15 @@ class JSON(object):
                 context = '\n'.join(lines[line - 4:line + 4])
                 if ("Expecting property name" in err.message) and \
                    ("'" in context):
-                    print "Possible invalid single-quote around here (JSON " \
-                        "only supports double-quotes):"
-                    print context
+                    print("Possible invalid single-quote around here (JSON "
+                        "only supports double-quotes):")
+                    print(context)
                 elif "Expecting property name" in err.message:
-                    print "Possible trailing comma somewhere around here:"
-                    print context
+                    print("Possible trailing comma somewhere around here:")
+                    print(context)
                 else:
-                    print "Error somewhere around here:"
-                    print context
+                    print("Error somewhere around here:")
+                    print(context)
             raise
 
         if force_ascii:
@@ -179,8 +179,12 @@ class JSON(object):
 
     def store(self, data, path, cls=MyEncoder):
         '''Write the data to a JSON formatted file.'''
+        if sys.version_info.major == 3:
+            bytedata = bytes(encode(data, cls), 'UTF-8')
+        else:
+            bytedata = encode(data, cls)
         with open(path, 'wb') as pfile:
-            pfile.write(encode(data, cls))
+            pfile.write(bytedata)
 
 
 def encode(data, cls=MyEncoder):
