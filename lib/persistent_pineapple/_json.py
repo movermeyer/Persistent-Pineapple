@@ -7,7 +7,7 @@ __author__ = "Timothy McFadden"
 __copyright__ = "Copyright 2014"
 __credits__ = ["Timothy McFadden", "Jason Unrein"]
 __license__ = "GPL"
-__version__ = "0.0.0.2"  # file version
+__version__ = "0.0.0.3"  # file version
 __maintainer__ = "Jason Unrein"
 __email__ = "JasonAUnrein@gmail.com"
 __status__ = "Development"
@@ -35,7 +35,8 @@ def container_to_ascii(item):
         >>>
     '''
     result = None
-    if sys.version_info.major == 2 and type(item) is unicode:
+    
+    if sys.version_info[0] == 2 and type(item) is unicode:
         result = item.encode('ascii')
     elif type(item) is list:
         result = map(lambda x: container_to_ascii(x), item[:])
@@ -179,7 +180,7 @@ class JSON(object):
 
     def store(self, data, path, cls=MyEncoder):
         '''Write the data to a JSON formatted file.'''
-        if sys.version_info.major == 3:
+        if sys.version_info[0] == 3:
             bytedata = bytes(encode(data, cls), 'UTF-8')
         else:
             bytedata = encode(data, cls)

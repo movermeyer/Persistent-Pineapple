@@ -4,7 +4,7 @@ __author__ = "Timothy McFadden"
 __copyright__ = "Copyright 2014"
 __credits__ = ["Timothy McFadden", "Jason Unrein"]
 __license__ = "GPL"
-__version__ = "0.0.0.2"  # file version
+__version__ = "0.0.0.3"  # file version
 __maintainer__ = "Jason Unrein"
 __email__ = "JasonAUnrein@gmail.com"
 __status__ = "Development"
@@ -27,22 +27,19 @@ class SanityTest(unittest.TestCase):
         '''Verify object creation works/fails correctly'''
 
         # verify error is raised when no file is specified
-        with self.assertRaises(TypeError):
-            PP()
-            PP(woc=True)
-            PP(woc=False)
+        self.assertRaises(TypeError, PP)
+        self.assertRaises(TypeError, PP, woc=True)
+        self.assertRaises(TypeError, PP, woc=False)
 
         # verify error is raised if file can't be found
-        with self.assertRaises(IOError):
-            PP(self.test_file)
-            PP(self.test_file, woc=True)
-            PP(self.test_file, woc=False)
+        self.assertRaises((OSError, IOError), PP, self.test_file)
+        self.assertRaises((OSError, IOError), PP, self.test_file, woc=True)
+        self.assertRaises((OSError, IOError), PP, self.test_file, woc=False)
 
         # verify valid file creates object
-        
-        self.assertIsInstance(PP(self.fqtest), PP)
-        self.assertIsInstance(PP(self.fqtest, woc=True), PP)
-        self.assertIsInstance(PP(self.fqtest, woc=False), PP)
+        self.assertTrue(isinstance(PP(self.fqtest), PP))
+        self.assertTrue(isinstance(PP(self.fqtest, woc=True), PP))
+        self.assertTrue(isinstance(PP(self.fqtest, woc=False), PP))
 
     def test_get(self):
         '''Verify get method functionality'''
@@ -63,8 +60,7 @@ class SanityTest(unittest.TestCase):
         pp = PP(self.fqtest, woc=False)
         pp.set("unsaved_value", 42)
         pp.reload()
-        with self.assertRaises(KeyError):
-            pp.get("unsaved_value")
+        self.assertRaises(KeyError, pp.get, "unsaved_value")
 
     def test_save(self):
         '''Verify save functionality works'''
