@@ -27,7 +27,7 @@ if __name__ == '__main__':
         description="JSON Settings",
         author="Timothy McFadden",
         url="https://github.com/JasonAUnrein/Persistent-Pineapple",
-        download_url="https://github.com/mtik00/Persistent-Pineapple/releases/download/v{0}/Persistent-Pineapple-{0}.tar.gz".format(__version__),
+        download_url="https://github.com/JasonAUnrein/Persistent-Pineapple/releases/download/v{0}/Persistent-Pineapple-{0}.tar.gz".format(__version__),
         install_requires=[],
         packages=find_packages(),
         package_data={"persistent_pineapple": ['.*']},

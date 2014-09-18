@@ -11,12 +11,12 @@ __status__ = "Development"
 
 # Imports #####################################################################
 from os import path, remove
-import unittest2
+import unittest
 from persistent_pineapple import PersistentPineapple as PP
 
 
 ###############################################################################
-class UnittestTest(unittest2.TestCase):
+class SanityTest(unittest.TestCase):
     test_path = path.dirname(path.realpath(__file__))
     test_file = "test1.json"
     save_file = "save1.json"
@@ -77,4 +77,4 @@ class UnittestTest(unittest2.TestCase):
         
 ###############################################################################
 if __name__ == "__main__":
-    unittest2.main(verbosity=2)
+    unittest.main()
