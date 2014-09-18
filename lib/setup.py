@@ -14,11 +14,7 @@ except ImportError:
 THIS_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Read the version from our project
-__version__ = None
-version_file = os.path.join(THIS_DIR, 'persistent_pineapple', '__init__.py')
-with open(version_file) as f:
-    exec(f.read())
-
+__version__ = "0.0.0.1"
 
 if __name__ == '__main__':
     setup(
