@@ -31,6 +31,7 @@ __status__ = "Development"
 
 # Imports #####################################################################
 import os.path
+from copy import copy
 from persistent_pineapple._json import JSON
 
 # Globals #####################################################################
@@ -48,13 +49,17 @@ class PersistentPineapple(object):
         Create a new instance or return the cached instance if the application
         has already created an instance with the specified path.  This is not
         a true singleton but a managed cache.
-        
+
         path - Full directory/filename of where to load and save the file
         woc - Write On Change
         '''
         self.path = path
         self.woc = woc
         self.lofc = lofc
+
+        self._settings_copy = None
+        self._pre_context_woc = None
+
         if path and path not in self.settings:
             self.settings[path] = {}
             self._load()
@@ -69,8 +74,11 @@ class PersistentPineapple(object):
         '''
         Load the new settings if the file has been modified since the last load
         '''
+        if not self.lofc:
+            return
+
         mtime = os.path.getmtime(self.path)
-        if self.lofc and self.mtime < mtime:
+        if self.mtime < mtime:
             self.mtime = mtime
             self._load()
 
@@ -101,6 +109,22 @@ class PersistentPineapple(object):
     def __len__(self):
         '''Return the number of settings stored'''
         return len(self.settings[self.path])
+
+    def __enter__(self):
+        '''Make a copy of our settings for reapplication upon exit.
+        We never want write-on-change to be True here, since this is assumed
+        to be a temporary situation.
+        '''
+        self._pre_context_woc = self.woc
+        self._settings_copy = copy(self.settings[self.path])
+        self.woc = False
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        '''Reapply the cached settings.'''
+        self.settings[self.path] = copy(self._settings_copy)
+        self.woc = self._pre_context_woc
+        self._settings_copy = None
+        self._pre_context_woc = None
 
     def get(self, key):
         '''
