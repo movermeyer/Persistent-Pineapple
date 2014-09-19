@@ -1,0 +1,10 @@
+Auto Generated API Documentation
+================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   lib/persistent_pineapple/_json
+   lib/persistent_pineapple

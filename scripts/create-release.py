@@ -77,6 +77,9 @@ def make_docs():
         source = os.path.abspath(os.path.join(doc_html_build, item))
         dest = os.path.abspath(os.path.join(doc_dest_dir, item))
 
+        if not os.path.exists(doc_dest_dir):
+            os.makedirs(doc_dest_dir)
+
         if os.path.isdir(source):
             shutil.copytree(source, dest)
         else:

@@ -34,16 +34,20 @@ if __name__ == '__main__':
         classifiers=[
             'Development Status :: 5 - Production/Stable',
             'Environment :: Other Environment',
-            'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+            'License :: OSI Approved :: MIT License',
             'Programming Language :: Python',
             'Programming Language :: Python :: 2',
+            'Programming Language :: Python :: 2.6',
             'Programming Language :: Python :: 2.7',
             'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.2',
+            'Programming Language :: Python :: 3.3',
+            'Programming Language :: Python :: 3.4',
             'Intended Audience :: Developers',
             'Environment :: Console',
             'Natural Language :: English',
             'Operating System :: OS Independent',
-            'Topic :: Security'
+            'Topic :: Software Development :: Libraries'
         ],
 
         long_description=open(os.path.join(THIS_DIR, "README.rst"), 'r').read()
