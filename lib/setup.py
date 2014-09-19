@@ -12,9 +12,11 @@ except ImportError:
 
 
 THIS_DIR = os.path.abspath(os.path.dirname(__file__))
-
+PKG_DIR = os.path.join(THIS_DIR, 'lib')
+sys.path.append(PKG_DIR)
+from persistent_pineapple import VERSION
 # Read the version from our project
-__version__ = "0.0.0.1"
+__version__ = VERSION
 
 if __name__ == '__main__':
     setup(
@@ -23,7 +25,7 @@ if __name__ == '__main__':
         description="JSON Settings",
         author="Timothy McFadden",
         url="https://github.com/JasonAUnrein/Persistent-Pineapple",
-        download_url="https://github.com/JasonAUnrein/Persistent-Pineapple/releases/download/v{0}/Persistent-Pineapple-{0}.tar.gz".format(__version__),
+        download_url="https://github.com/JasonAUnrein/Persistent-Pineapple/releases/Persistent-Pineapple-{0}.tar.gz".format(__version__),
         install_requires=[],
         packages=find_packages(),
         package_data={"persistent_pineapple": ['.*']},

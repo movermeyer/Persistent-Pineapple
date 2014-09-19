@@ -105,10 +105,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Read the version from our project
-    __version__ = None
     sys.path.append(LIB_DIR)
-    with open(os.path.join(LIB_DIR, PROJ_NAME, '__init__.py'), 'rb') as f:
-        exec(f.read())
+    from persistent_pineapple import VERSION
+    # Read the version from our project
+    __version__ = VERSION
 
     remove_directory(release_dir, remove_top=False, filter=lambda x: "keep" not in x)
 

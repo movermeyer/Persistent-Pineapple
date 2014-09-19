@@ -57,11 +57,10 @@ copyright = COPYRIGHT
 # Read the version from our project
 THIS_DIR = os.path.realpath(os.path.dirname(__file__))
 LIB_DIR = os.path.realpath(os.path.join(THIS_DIR, '..', 'lib'))
-sys.path.insert(0, os.path.abspath(LIB_DIR))
-version_file = os.path.join(LIB_DIR, 'persistent_pineapple', '__init__.py')
-__version__ = None
-with open(version_file, 'rb') as f:
-    exec(f.read())
+sys.path.append(LIB_DIR)
+from persistent_pineapple import VERSION
+# Read the version from our project
+__version__ = VERSION
 
 # Generate the automatic lib documentation
 genpath = os.path.join(THIS_DIR, 'auto-generate.py')
