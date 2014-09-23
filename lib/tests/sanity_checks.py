@@ -47,7 +47,7 @@ class SanityTest(unittest.TestCase):
         self.assertEqual(pp.get("setting1"), "value1")
         self.assertEqual(pp.get("setting 2"), 2)
         self.assertEqual(pp.get("section1"), {'subsetting1': 'subvalue2'})
-    
+
     def test_borg(self):
         '''Verify borg functionality works (simple singleton)'''
         pp1 = PP(self.fqtest, woc=False)
@@ -70,7 +70,31 @@ class SanityTest(unittest.TestCase):
         pp2 = PP(self.fqsave)
         self.assertEqual(pp1.settings, pp2.settings)
         remove(self.fqsave)
-        
+
+    def test_conext(self):
+        '''Verify context manager functionality works'''
+        pp = PP(self.fqtest, woc=False)
+
+        pp["contex-value-1"] = "one"
+        pp["contex-value-2"] = [1, 2, 3]
+
+        before1 = pp["contex-value-1"]
+        before2 = pp["contex-value-2"]
+
+        with pp:
+            pp["contex-value-1"] = "asdf1234"
+            pp["contex-value-2"] = [9, 8, 7, 6]
+
+            self.assertEqual(pp["contex-value-1"], "asdf1234")
+            self.assertNotEqual(pp["contex-value-1"], before1)
+
+            self.assertEqual(pp["contex-value-2"], [9, 8, 7, 6])
+            self.assertNotEqual(pp["contex-value-2"], before2)
+
+        self.assertEqual(pp["contex-value-1"], before1)
+        self.assertEqual(pp["contex-value-2"], before2)
+
+
 ###############################################################################
 if __name__ == "__main__":
     unittest.main()
