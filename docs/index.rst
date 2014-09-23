@@ -2,7 +2,7 @@
    sphinx-quickstart on Fri Sep 05 08:27:42 2014.
 
 Documentation for Persistent Pineapple
-============================
+======================================
 
 Contents:
 

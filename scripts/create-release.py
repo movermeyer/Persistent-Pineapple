@@ -70,7 +70,8 @@ def make_docs():
 
     ex("make clean && make html", cwd=doc_build_dir)
 
-    remove_directory(doc_dest_dir, False)
+    if os.path.isdir(doc_dest_dir):
+        remove_directory(doc_dest_dir, False)
 
     items = set(os.listdir(doc_html_build)) ^ set(['.buildinfo', 'objects.inv'])
     for item in items:
@@ -137,3 +138,7 @@ if __name__ == '__main__':
         path = os.path.join(LIB_DIR, directory)
         if os.path.exists(path):
             remove_directory(path)
+
+    # clean up the doc build
+    for directory in [os.path.join(LIB_DIR, 'docs'), os.path.join(THIS_DIR, '..', 'docs', '_build')]:
+        remove_directory(directory, remove_top=True)
