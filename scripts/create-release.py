@@ -140,5 +140,10 @@ if __name__ == '__main__':
             remove_directory(path)
 
     # clean up the doc build
-    for directory in [os.path.join(LIB_DIR, 'docs'), os.path.join(THIS_DIR, '..', 'docs', '_build')]:
-        remove_directory(directory, remove_top=True)
+    for directory in [
+            os.path.join(LIB_DIR, 'docs'),
+            os.path.join(THIS_DIR, '..', 'docs', '_build'),
+            os.path.join(THIS_DIR, '..', 'docs', 'rst', 'lib')]:
+                remove_directory(directory, remove_top=True)
+
+    os.unlink(os.path.join(THIS_DIR, '..', 'docs', 'rst', 'auto.rst'))
