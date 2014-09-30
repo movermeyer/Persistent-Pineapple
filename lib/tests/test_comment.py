@@ -4,16 +4,21 @@ __author__ = "Timothy McFadden"
 __copyright__ = "Copyright 2014"
 __credits__ = ["Timothy McFadden", "Jason Unrein"]
 __license__ = "GPL"
-__version__ = "0.0.0.1"  # file version
+__version__ = "0.0.0.2"  # file version
 __maintainer__ = "Jason Unrein"
 __email__ = "JasonAUnrein@gmail.com"
 __status__ = "Development"
 
 # Imports #####################################################################
 import re
+import sys
 import unittest
 from os import path, unlink
 from persistent_pineapple._json import CommentedJSON
+
+
+if sys.version_info[0] == 3:
+    basestring = str
 
 
 ###############################################################################
@@ -45,6 +50,9 @@ class CommentTest(unittest.TestCase):
         lines = [x.strip() for x in lines]
         header = result.split("\n")[:2]
 
+        if sys.version_info[0] == 3:
+            header = list(map(lambda x: bytes(x, 'UTF-8'), header))
+
         self.assertEqual(lines, header)
 
         self.assertTrue(re.search("a setting's comment\n\s+\"setting1", result))
@@ -66,6 +74,9 @@ class CommentTest(unittest.TestCase):
 
         with open(CommentTest.fqcomment, 'rb') as fh:
             file_text = fh.read()
+
+        if sys.version_info[0] == 3:
+            file_text = file_text.decode('UTF-8')
 
         self.assertEqual(result, file_text)
 

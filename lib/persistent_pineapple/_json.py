@@ -18,6 +18,10 @@ import re
 import sys
 
 
+if sys.version_info[0] == 3:
+    basestring = str
+
+
 ###############################################################################
 def container_to_ascii(item):
     '''Converts all items from unicode to ascii, where needed.  This is a
@@ -40,7 +44,7 @@ def container_to_ascii(item):
     if sys.version_info[0] == 2 and type(item) is unicode:
         result = item.encode('ascii')
     elif type(item) is list:
-        result = map(lambda x: container_to_ascii(x), item[:])
+        result = list(map(lambda x: container_to_ascii(x), item[:]))
     elif type(item) is dict:
         result = dict()
         for key, value in item.items():
@@ -55,7 +59,10 @@ def container_to_ascii(item):
 class MyEncoder(json.JSONEncoder):
     '''Simple decoder that returns the dict of an object.'''
     def default(self, obj):
-        return obj.__dict__
+        if hasattr(obj, '__dict__'):
+            return dict(obj.__dict__)
+        else:
+            return json.JSONEncoder.default(self, obj)
 
 
 ###############################################################################
