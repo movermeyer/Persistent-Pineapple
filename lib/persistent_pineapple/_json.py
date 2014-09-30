@@ -358,7 +358,7 @@ class CommentedJSON(JSON):
                 result += "\n"
 
         if force_ascii:
-            result = result.encode('ascii')
+            result = container_to_ascii(result)
 
         return result
 

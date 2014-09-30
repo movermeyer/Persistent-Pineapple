@@ -58,7 +58,6 @@ class CommentTest(unittest.TestCase):
         obj = CommentedJSON()
         data = obj.load(path=CommentTest.fqlist)
         result = obj.as_string(data)
-
         self.assertTrue(re.search("2,\s+// hanging", result))
 
     def test_store(self):
