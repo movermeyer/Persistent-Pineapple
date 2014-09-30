@@ -17,10 +17,6 @@ from os import path, unlink
 from persistent_pineapple._json import CommentedJSON
 
 
-if sys.version_info[0] == 3:
-    basestring = str
-
-
 ###############################################################################
 class CommentTest(unittest.TestCase):
     test_path = path.dirname(path.realpath(__file__))
@@ -28,11 +24,6 @@ class CommentTest(unittest.TestCase):
     fqtest = path.join(test_path, test_file)
     fqlist = path.join(test_path, "list.json")
     fqcomment = path.join(test_path, "test-comment.json")
-
-    @classmethod
-    def tearDownClass(cls):
-        if path.isfile(CommentTest.fqcomment):
-            unlink(CommentTest.fqcomment)
 
     def test_load(self):
         CommentedJSON().load(path=CommentTest.fqtest)
@@ -42,7 +33,12 @@ class CommentTest(unittest.TestCase):
         data = obj.load(path=CommentTest.fqtest)
         result = obj.as_string(data)
 
-        self.assertIsInstance(result, basestring)
+        if sys.version_info < (2, 7):
+            self.assertTrue(type(result) is str)
+        elif sys.version_info < (3,):
+            self.assertIsInstance(result, basestring)
+        else:
+            self.assertIsInstance(result, str)
 
         with open(self.fqtest, 'rb') as fh:
             lines = list(fh)[:2]
@@ -79,6 +75,8 @@ class CommentTest(unittest.TestCase):
             file_text = file_text.decode('UTF-8')
 
         self.assertEqual(result, file_text)
+
+        unlink(CommentTest.fqcomment)
 
     def test_load_from_string(self):
         string = '//heading line1\n//heading line2\n{\n    //test\n    "setting1": 2\n}'

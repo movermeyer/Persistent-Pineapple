@@ -335,7 +335,7 @@ class CommentedJSON(JSON):
 
         return json_data
 
-    def as_string(self, data, cls=MyEncoder):
+    def as_string(self, data, cls=MyEncoder, force_ascii=True):
         string = encode(data, cls)
 
         if self._header:
@@ -348,14 +348,17 @@ class CommentedJSON(JSON):
 
         for index, line in enumerate(lines):
             if self._setting_line_comment(line):
-                result += "\n{}\n{}\n".format(
+                result += "\n{0}\n{1}\n".format(
                     self._setting_line_comment(line), line)
             elif self._setting_hanging_comment(line):
-                result += "{}  {}\n".format(
+                result += "{0}  {1}\n".format(
                     line, self._setting_hanging_comment(line).strip())
             else:
                 result += line
                 result += "\n"
+
+        if force_ascii:
+            result = result.encode('ascii')
 
         return result
 
