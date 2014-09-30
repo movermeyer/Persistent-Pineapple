@@ -1,4 +1,4 @@
-// settings test file 
+// settings test file
 // This another comment
 {
     // Server settings ////////////////////////////////////////////////////////
@@ -12,5 +12,7 @@
     // A sub section //////////////////////////////////////////////////////////
     "section1": {
         "subsetting1": "subvalue2"
-    }
+    },
+
+    "setting3": [1, /*2,*/ 3]  // inline+hanging comment
 }
