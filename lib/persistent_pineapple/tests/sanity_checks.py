@@ -4,14 +4,17 @@ __author__ = "Timothy McFadden"
 __copyright__ = "Copyright 2014"
 __credits__ = ["Timothy McFadden", "Jason Unrein"]
 __license__ = "GPL"
-__version__ = "0.0.0.3"  # file version
+__version__ = "0.0.0.4"  # file version
 __maintainer__ = "Jason Unrein"
 __email__ = "JasonAUnrein@gmail.com"
 __status__ = "Development"
 
 # Imports #####################################################################
+import sys
 from os import path, remove
 import unittest
+
+sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), '..', '..')))
 from persistent_pineapple import PersistentPineapple as PP
 
 
