@@ -12,6 +12,7 @@ __status__ = "Development"
 # Imports #####################################################################
 import sys
 from os import path, remove
+from shutil import copyfile
 import unittest
 
 sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), '..', '..')))
@@ -71,7 +72,6 @@ class SanityTest(unittest.TestCase):
     def test_save(self):
         '''Verify save functionality works'''
         pp1 = PP(self.fqtest, woc=False)
-        pp1.save()
         pp1.set("unsaved_value", 42)
         pp1.save(path=self.fqsave)
         pp2 = PP(self.fqsave)
@@ -108,8 +108,7 @@ class SanityTest(unittest.TestCase):
 
     def test_woc(self):
         '''Verify woc option functionality works'''
-        pp = PP(self.fqtest)
-        pp.save(self.fqwoc)
+        copyfile(self.fqtest, self.fqwoc)
 
         pp1 = PP(self.fqwoc, woc=True, lofc=True)
         pp1['woc_value1'] = 1
@@ -117,6 +116,8 @@ class SanityTest(unittest.TestCase):
         del(pp1['woc_value1'])
 
         pp1.set('woc_value2', 2)
+        pp1.save()
+        remove(self.fqwoc)
 
 
 ###############################################################################

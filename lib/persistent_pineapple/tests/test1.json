@@ -1,6 +1,6 @@
 // settings test file 
 // This another comment
-{
+ {
     // Server settings ////////////////////////////////////////////////////////
 
     // a setting's comment
@@ -10,6 +10,7 @@
     "setting 2": 2,
 
     // A sub section //////////////////////////////////////////////////////////
-    "section1": {
-        "subsetting1": "subvalue2"
+     "section1": {
+         "subsetting1": "subvalue2"
     }
+}
