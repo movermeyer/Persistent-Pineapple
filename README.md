@@ -2,6 +2,8 @@
 
 [![rtd state](https://readthedocs.org/projects/persistent-pineapple/badge/?version=latest)](https://readthedocs.org/projects/persistent-pineapple/?badge=latest)
 
+[![Coverage Status](https://img.shields.io/coveralls/JasonAUnrein/Persistent-Pineapple.svg)](https://coveralls.io/r/JasonAUnrein/Persistent-Pineapple)
+
 ## Introduction
 Persistent Pineapple provides a simple interface to save settings for
 applications or other modules.  The settings file is in the JSON format for

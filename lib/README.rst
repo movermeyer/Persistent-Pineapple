@@ -63,3 +63,7 @@ Example settings file (/etc/myapp.json)
    :target: https://travis-ci.org/JasonAUnrein/Persistent-Pineapple
 .. |rtd state| image:: https://readthedocs.org/projects/persistent-pineapple/badge/?version=latest
    :target: https://readthedocs.org/projects/persistent-pineapple/?badge=latest
+.. image:: https://coveralls.io/repos/JasonAUnrein/Persistent-Pineapple/badge.png
+  :target: https://coveralls.io/r/JasonAUnrein/Persistent-Pineapple
+
+
