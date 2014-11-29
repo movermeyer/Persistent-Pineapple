@@ -23,8 +23,10 @@ class SanityTest(unittest.TestCase):
     test_path = path.dirname(path.realpath(__file__))
     test_file = "test1.json"
     save_file = "save1.json"
+    woc_file = "woc1.json"
     fqtest = path.join(test_path, test_file)
     fqsave = path.join(test_path, save_file)
+    fqwoc = path.join(test_path, woc_file)
 
     def test_init(self):
         '''Verify object creation works/fails correctly'''
@@ -33,6 +35,7 @@ class SanityTest(unittest.TestCase):
         self.assertRaises(TypeError, PP)
         self.assertRaises(TypeError, PP, woc=True)
         self.assertRaises(TypeError, PP, woc=False)
+        self.assertRaises(TypeError, PP, path=None)
 
         # verify error is raised if file can't be found
         self.assertRaises((OSError, IOError), PP, self.test_file)
@@ -68,11 +71,17 @@ class SanityTest(unittest.TestCase):
     def test_save(self):
         '''Verify save functionality works'''
         pp1 = PP(self.fqtest, woc=False)
+        pp1.save()
         pp1.set("unsaved_value", 42)
         pp1.save(path=self.fqsave)
         pp2 = PP(self.fqsave)
         self.assertEqual(pp1.settings, pp2.settings)
         remove(self.fqsave)
+
+    def test_len(self):
+        '''Verify __len__ functionality works'''
+        pp = PP(self.fqtest, woc=False)
+        len(pp)
 
     def test_conext(self):
         '''Verify context manager functionality works'''
@@ -96,6 +105,18 @@ class SanityTest(unittest.TestCase):
 
         self.assertEqual(pp["contex-value-1"], before1)
         self.assertEqual(pp["contex-value-2"], before2)
+
+    def test_woc(self):
+        '''Verify woc option functionality works'''
+        pp = PP(self.fqtest)
+        pp.save(self.fqwoc)
+
+        pp1 = PP(self.fqwoc, woc=True, lofc=True)
+        pp1['woc_value1'] = 1
+
+        del(pp1['woc_value1'])
+
+        pp1.set('woc_value2', 2)
 
 
 ###############################################################################

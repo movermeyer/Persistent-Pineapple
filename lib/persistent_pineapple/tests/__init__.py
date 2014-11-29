@@ -8,5 +8,3 @@ __version__ = "0.0.0.1"  # file version
 __maintainer__ = "Jason Unrein"
 __email__ = "JasonAUnrein@gmail.com"
 __status__ = "Development"
-
-# dummy file for now
