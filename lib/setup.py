@@ -31,7 +31,7 @@ if __name__ == '__main__':
         package_data={"persistent_pineapple": ['.*']},
         zip_safe=True,
         include_package_data=True,
-        test_suite="tests",
+        test_suite="persistent_pineapple.tests",
 
         classifiers=[
             'Development Status :: 5 - Production/Stable',

@@ -4,14 +4,19 @@ __author__ = "Timothy McFadden"
 __copyright__ = "Copyright 2014"
 __credits__ = ["Timothy McFadden", "Jason Unrein"]
 __license__ = "GPL"
-__version__ = "0.0.0.3"  # file version
+__version__ = "0.0.0.4"  # file version
 __maintainer__ = "Jason Unrein"
 __email__ = "JasonAUnrein@gmail.com"
 __status__ = "Development"
 
 # Imports #####################################################################
+import sys
 from os import path, remove
+from shutil import copyfile
+from time import sleep
 import unittest
+
+sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), '..', '..')))
 from persistent_pineapple import PersistentPineapple as PP
 
 
@@ -20,8 +25,10 @@ class SanityTest(unittest.TestCase):
     test_path = path.dirname(path.realpath(__file__))
     test_file = "test1.json"
     save_file = "save1.json"
+    woc_file = "woc1.json"
     fqtest = path.join(test_path, test_file)
     fqsave = path.join(test_path, save_file)
+    fqwoc = path.join(test_path, woc_file)
 
     def test_init(self):
         '''Verify object creation works/fails correctly'''
@@ -30,6 +37,7 @@ class SanityTest(unittest.TestCase):
         self.assertRaises(TypeError, PP)
         self.assertRaises(TypeError, PP, woc=True)
         self.assertRaises(TypeError, PP, woc=False)
+        self.assertRaises(TypeError, PP, path=None)
 
         # verify error is raised if file can't be found
         self.assertRaises((OSError, IOError), PP, self.test_file)
@@ -71,6 +79,11 @@ class SanityTest(unittest.TestCase):
         self.assertEqual(pp1.settings, pp2.settings)
         remove(self.fqsave)
 
+    def test_len(self):
+        '''Verify __len__ functionality works'''
+        pp = PP(self.fqtest, woc=False)
+        len(pp)
+
     def test_conext(self):
         '''Verify context manager functionality works'''
         pp = PP(self.fqtest, woc=False)
@@ -93,6 +106,30 @@ class SanityTest(unittest.TestCase):
 
         self.assertEqual(pp["contex-value-1"], before1)
         self.assertEqual(pp["contex-value-2"], before2)
+
+    def test_woc_and_lofc(self):
+        '''Verify woc and lofc option functionality works'''
+        copyfile(self.fqtest, self.fqwoc)
+        copyfile(self.fqtest, self.fqsave)
+        pp_orig = PP(self.fqsave, lofc=True)
+        pp1 = PP(self.fqwoc, lofc=True)
+
+        pp2 = PP(self.fqwoc, woc=True, lofc=True)
+        pp2['woc_value1'] = 1
+
+        del(pp2['woc_value1'])
+
+        pp2.set('woc_value2', 2)
+        pp2.save()
+
+        pp1['woc_value2']
+
+        sleep(.1)
+        copyfile(self.fqwoc, self.fqsave)
+        pp_orig.get('woc_value2')
+
+        remove(self.fqwoc)
+        remove(self.fqsave)
 
 
 ###############################################################################

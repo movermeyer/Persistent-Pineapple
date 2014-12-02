@@ -78,11 +78,13 @@ class JSON(object):
 
     * single-quotes (B{'}) are invalid; always use double-quotes (B{"})
     * A Python B{None} is represented by a JSON B{null}
-    * A list cannot end with a trailing comma (a comma after the last item in the list)
+    * A list cannot end with a trailing comma (a comma after the last item in
+      the list)
 
     Comments:
 
-    * JSON does not supports comments.  This functionality was added to this object to make life easier.
+    * JSON does not supports comments.  This functionality was added to this
+      class to make life easier.
 
     We support the following types of comments
 
@@ -99,7 +101,8 @@ class JSON(object):
             // this line is ignored
             {"key": 5} // the rest of the line is ignored
             {"key": 5 /*,"key2": 6*/}  // key2 and the remainder is ignored
-            {"key": 5}// INVALID!  You must have at least 1 whitespace character before // for hanging comments
+            {"key": 5}// INVALID!  At least 1 whitespace character
+                      // before // for hanging comments
 
     '''
 
@@ -165,15 +168,15 @@ class JSON(object):
         try:
             json_data = json.loads('\n'.join(lines))
         except ValueError as err:
-            if re.search(r"line (\d+)", err.message):
-                line = int(re.search(r"line (\d+)", err.message).group(1))
+            if re.search(r"line (\d+)", str(err)):
+                line = int(re.search(r"line (\d+)", str(err)).group(1))
                 context = '\n'.join(lines[line - 4:line + 4])
-                if ("Expecting property name" in err.message) and \
+                if ("Expecting property name" in str(err)) and \
                    ("'" in context):
                     print("Possible invalid single-quote around here (JSON "
                           "only supports double-quotes):")
                     print(context)
-                elif "Expecting property name" in err.message:
+                elif "Expecting property name" in str(err):
                     print("Possible trailing comma somewhere around here:")
                     print(context)
                 else:
