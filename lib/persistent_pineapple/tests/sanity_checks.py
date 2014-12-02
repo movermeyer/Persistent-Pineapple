@@ -13,6 +13,7 @@ __status__ = "Development"
 import sys
 from os import path, remove
 from shutil import copyfile
+from time import sleep
 import unittest
 
 sys.path.insert(0, path.abspath(path.join(path.dirname(__file__), '..', '..')))
@@ -106,18 +107,29 @@ class SanityTest(unittest.TestCase):
         self.assertEqual(pp["contex-value-1"], before1)
         self.assertEqual(pp["contex-value-2"], before2)
 
-    def test_woc(self):
-        '''Verify woc option functionality works'''
+    def test_woc_and_lofc(self):
+        '''Verify woc and lofc option functionality works'''
         copyfile(self.fqtest, self.fqwoc)
+        copyfile(self.fqtest, self.fqsave)
+        pp_orig = PP(self.fqsave, lofc=True)
+        pp1 = PP(self.fqwoc, lofc=True)
 
-        pp1 = PP(self.fqwoc, woc=True, lofc=True)
-        pp1['woc_value1'] = 1
+        pp2 = PP(self.fqwoc, woc=True, lofc=True)
+        pp2['woc_value1'] = 1
 
-        del(pp1['woc_value1'])
+        del(pp2['woc_value1'])
 
-        pp1.set('woc_value2', 2)
-        pp1.save()
+        pp2.set('woc_value2', 2)
+        pp2.save()
+
+        pp1['woc_value2']
+
+        sleep(.1)
+        copyfile(self.fqwoc, self.fqsave)
+        pp_orig.get('woc_value2')
+
         remove(self.fqwoc)
+        remove(self.fqsave)
 
 
 ###############################################################################
