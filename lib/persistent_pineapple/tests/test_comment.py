@@ -38,7 +38,7 @@ class CommentTest(unittest.TestCase):
         elif sys.version_info < (3,):
             self.assertIsInstance(result, basestring)
         else:
-            self.assertIsInstance(result, str)
+            self.assertTrue(isinstance(result, str))
 
         with open(self.fqtest, 'rb') as fh:
             lines = list(fh)[:2]
