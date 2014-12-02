@@ -14,9 +14,8 @@ except ImportError:
 THIS_DIR = os.path.abspath(os.path.dirname(__file__))
 PKG_DIR = os.path.join(THIS_DIR, 'lib')
 sys.path.append(PKG_DIR)
-from persistent_pineapple import VERSION
 # Read the version from our project
-__version__ = VERSION
+from persistent_pineapple import __version__
 
 if __name__ == '__main__':
     setup(

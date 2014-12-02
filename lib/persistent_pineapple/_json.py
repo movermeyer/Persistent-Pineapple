@@ -3,15 +3,6 @@ This module contains a wrapper for Python's built-in json module to make it
 easier to use.
 '''
 
-__author__ = "Timothy McFadden"
-__copyright__ = "Copyright 2014"
-__credits__ = ["Timothy McFadden", "Jason Unrein"]
-__license__ = "GPL"
-__version__ = "0.0.0.3"  # file version
-__maintainer__ = "Jason Unrein"
-__email__ = "JasonAUnrein@gmail.com"
-__status__ = "Development"
-
 # Imports #####################################################################
 import json
 import re
@@ -226,8 +217,8 @@ class CommentedJSON(JSON):
 
     - Line comments not immediately preceding a setting are ignored
     - ``/*  */`` style comments are discarded
-    - Block comments not associated with a setting are ignored, with the exception
-      of a comment at the top of the file (called the _header_)
+    - Block comments not associated with a setting are ignored, with the
+      exception of a comment at the top of the file (called the _header_)
     - Settings with the same name will collide
     - Guaranteed not to work well with complex JSON
 

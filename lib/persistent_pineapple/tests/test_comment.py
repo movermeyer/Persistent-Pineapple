@@ -1,14 +1,5 @@
 #!/usr/bin/env python
 
-__author__ = "Timothy McFadden"
-__copyright__ = "Copyright 2014"
-__credits__ = ["Timothy McFadden", "Jason Unrein"]
-__license__ = "GPL"
-__version__ = "0.0.0.2"  # file version
-__maintainer__ = "Jason Unrein"
-__email__ = "JasonAUnrein@gmail.com"
-__status__ = "Development"
-
 # Imports #####################################################################
 import re
 import sys
@@ -51,7 +42,8 @@ class CommentTest(unittest.TestCase):
 
         self.assertEqual(lines, header)
 
-        self.assertTrue(re.search("a setting's comment\n\s+\"setting1", result))
+        self.assertTrue(re.search("a setting's comment\n\s+\"setting1",
+                                  result))
         self.assertTrue(re.search("\"setting3\".*// inline", result))
 
     def test_list(self):
@@ -78,7 +70,8 @@ class CommentTest(unittest.TestCase):
         unlink(CommentTest.fqcomment)
 
     def test_load_from_string(self):
-        string = '//heading line1\n//heading line2\n{\n    //test\n    "setting1": 2\n}'
+        string = '//heading line1\n//heading line2\n{\n    //test\n    ' \
+                 '"setting1": 2\n}'
         obj = CommentedJSON()
         data = obj.load(string=string)
 

@@ -20,22 +20,12 @@ Example code:
 
 '''
 
-__author__ = "Timothy McFadden"
-__copyright__ = "Copyright 2014"
-__credits__ = ["Timothy McFadden", "Jason Unrein"]
-__license__ = "GPL"
-__version__ = "0.0.0.3"  # file version
-__maintainer__ = "Jason Unrein"
-__email__ = "JasonAUnrein@gmail.com"
-__status__ = "Development"
+__version__ = "1.0.0"  # file version
 
 # Imports #####################################################################
 import os.path
 from copy import copy
 from persistent_pineapple._json import JSON
-
-# Globals #####################################################################
-VERSION = "0.0.0.2"  # Library version
 
 
 ###############################################################################
