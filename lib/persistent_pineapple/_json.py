@@ -40,7 +40,7 @@ def container_to_ascii(item):
     if sys.version_info[0] == 2 and type(item) is unicode:
         result = item.encode('ascii')
     elif type(item) is list:
-        result = map(lambda x: container_to_ascii(x), item[:])
+        result = list(map(lambda x: container_to_ascii(x), item[:]))
     elif type(item) is dict:
         result = dict()
         for key, value in item.items():
@@ -161,15 +161,15 @@ class JSON(object):
         try:
             json_data = json.loads('\n'.join(lines))
         except ValueError as err:
-            if re.search(r"line (\d+)", err.message):
-                line = int(re.search(r"line (\d+)", err.message).group(1))
+            if re.search(r"line (\d+)", str(err)):
+                line = int(re.search(r"line (\d+)", str(err)).group(1))
                 context = '\n'.join(lines[line - 4:line + 4])
-                if ("Expecting property name" in err.message) and \
+                if ("Expecting property name" in str(err)) and \
                    ("'" in context):
                     print("Possible invalid single-quote around here (JSON "
                           "only supports double-quotes):")
                     print(context)
-                elif "Expecting property name" in err.message:
+                elif "Expecting property name" in str(err):
                     print("Possible trailing comma somewhere around here:")
                     print(context)
                 else:
