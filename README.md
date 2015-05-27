@@ -11,7 +11,7 @@ simplicty.  A slightly modified JSON format is used to allow for comments and
 other creature features.  Please read the _json.py file for more details.
 
 ## Documentation
-Documentation is hosted on [persistetpineapple.readthedocs.org](http://persistetpineapple.readthedocs.org/en/latest/)
+Documentation is hosted on [persistent-pineapple.readthedocs.org](http://persistent-pineapple.readthedocs.org/en/latest/)
 
 ## Install
 Download the tarball and install with `pip install <package>`.
