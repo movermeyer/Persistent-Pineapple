@@ -1,8 +1,7 @@
 [![travis ci build state](https://travis-ci.org/JasonAUnrein/Persistent-Pineapple.svg?branch=master)](https://travis-ci.org/JasonAUnrein/Persistent-Pineapple)
 [![rtd state](https://readthedocs.org/projects/persistent-pineapple/badge/?version=latest)](https://readthedocs.org/projects/persistent-pineapple/?badge=latest)
 [![Coverage Status](https://img.shields.io/coveralls/JasonAUnrein/Persistent-Pineapple.svg)](https://coveralls.io/r/JasonAUnrein/Persistent-Pineapple)
-[![Version](https://img.shields.io/pypi/v/Persistent-Pineapple.svg
-[![Downloads](https://img.shields.io/pypi/dm/Persistent-Pineapple.svg
+[![Version](https://img.shields.io/pypi/v/Persistent-Pineapple.svg)](https://pypi.python.org/pypi/Persistent-Pineapple)
 
 ## Introduction
 Persistent Pineapple provides a simple interface to save settings for
